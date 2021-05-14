@@ -3,8 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:nodepad/extraWidgets.dart';
+import 'package:nodepad/main.dart';
 import 'package:nodepad/screens/login.dart';
-import 'package:nodepad/screens/customroute.dart';
 import '../services/auth.dart';
 import 'addnotes.dart';
 
@@ -20,6 +20,7 @@ class _HomescreenState extends State<Homescreen> {
   void initState() {
     super.initState();
     if (user.uid == null) Navigator.pop(context);
+    print("main");
   }
 
   final SnackBar snackBar = SnackBar(
@@ -56,7 +57,7 @@ class _HomescreenState extends State<Homescreen> {
                       ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     },
                     child: Text(
-                      "confrim",
+                      "confirm",
                       style: TextStyle(fontSize: 18, color: w),
                     )),
                 SizedBox(width: 32.1),
@@ -112,8 +113,9 @@ class _HomescreenState extends State<Homescreen> {
                       vibe();
                       googleSignIn.disconnect();
                       auth.signOut();
-                      Navigator.of(context).push(
-                          MaterialPageRoute(builder: (contex) => loginsc()));
+
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (contex) => Switchscreen()));
                     },
                     child: Text(
                       "Logout",
@@ -157,6 +159,7 @@ class _HomescreenState extends State<Homescreen> {
   String k1 = "hello", v1;
   var collections = FirebaseFirestore.instance;
   User user = auth.currentUser;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

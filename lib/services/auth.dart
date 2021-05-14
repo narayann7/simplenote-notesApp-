@@ -37,6 +37,8 @@ Future<User> signInWithGoogle() async {
     // } catch (e) {
     //   // handle the error here
     // }
+
   }
+
   return user;
 }

@@ -2,10 +2,8 @@ import 'dart:ui';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nodepad/extraWidgets.dart';
-import 'package:nodepad/screens/customroute.dart';
-import 'package:nodepad/screens/mainscreen.dart';
+import 'package:nodepad/main.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
 import '../services/auth.dart';
 
 User user = auth.currentUser;
@@ -31,20 +29,10 @@ class _loginscState extends State<loginsc> {
       msg: 'login failed',
       toastLength: Toast.LENGTH_SHORT,
       backgroundColor: Colors.black.withOpacity(0.4));
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     if (user != null) {
-//       signInWithGoogle().whenComplete(() {
-//         Navigator.of(context).pushReplacement(
-//           MaterialPageRoute(
-//             builder: (contex) => Homescreen(),
-//           ),
-//         );
-//       });
-//     }
-//   }
+  void initState() {
+    super.initState();
+    print("login");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -89,8 +77,10 @@ class _loginscState extends State<loginsc> {
                     vibe();
                     signInWithGoogle().whenComplete(() {
                       if (loginsc.loogin == true) {
-                        Navigator.pushReplacement(
-                            context, ScaleRoute(page: Homescreen()));
+                        Navigator.of(context)
+                            .push(MaterialPageRoute(builder: (context) {
+                          return Switchscreen();
+                        }));
                       } else
                         _showToast();
                     });
